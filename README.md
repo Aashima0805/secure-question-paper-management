@@ -1,6 +1,6 @@
 # Secure Management of Competitive Examination Question Papers
 
-## 1. Project Description
+## Project Description
 
 The **Secure Management of Competitive Examination Question Papers** system is a secure web-based application designed to manage government competitive examination question papers throughout their lifecycle.
 
@@ -10,21 +10,7 @@ The system is designed with a cloud deployment architecture so that the frontend
 
 ---
 
-## 2. Objectives
-
-* Securely upload and store examination question papers.
-* Restrict access based on user roles.
-* Provide multi-factor authentication using OTP.
-* Encrypt question papers before storage.
-* Verify file integrity using SHA-256 hashing.
-* Maintain an audit trail of important activities.
-* Support reviewer and approver workflows.
-* Prevent question papers from being downloaded before the scheduled release time.
-* Provide controlled access to examination centers.
-
----
-
-## 3. Technologies and Tools Used
+## Technologies and Tools Used
 
 ### Frontend
 
@@ -76,10 +62,99 @@ The system is designed with a cloud deployment architecture so that the frontend
 * Supabase
 
 ---
+## Installation and Setup
+
+### Prerequisites
+
+Install the following:
+
+* Java JDK
+* Maven
+* Node.js and npm
+* Git
+* A Supabase account
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/Aashima0805/secure-question-paper-management.git
+cd secure-question-paper-management
+```
+
+---
+
+## Backend Setup
+
+Navigate to the backend:
+
+```bash
+cd backend
+```
+
+Configure the required environment variables:
+
+```text
+SUPABASE_URL
+SUPABASE_KEY
+ENCRYPTION_SECRET_KEY
+JWT_SECRET
+```
+
+Email configuration is also required for OTP functionality:
+
+```text
+MAIL_USERNAME
+MAIL_PASSWORD
+```
+
+Run the Spring Boot application using:
+
+```bash
+mvn spring-boot:run
+```
+
+The backend runs on:
+
+```text
+http://localhost:8080
+```
+
+---
+
+## Frontend Setup
+
+Open another terminal and navigate to:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file:
+
+```env
+VITE_API_BASE_URL=http://localhost:8080/api
+```
+
+Start the frontend:
+
+```bash
+npm run dev
+```
+
+The frontend runs on:
+
+```text
+http://localhost:5173
+```
 
 
-
-## 6. Project Structure
+## Project Structure
 
 ```text
 secure-question-paper-management/
@@ -127,7 +202,7 @@ secure-question-paper-management/
 
 ---
 
-## 7. Backend Modules
+## Backend Modules
 
 ### Config
 
@@ -159,7 +234,7 @@ Contains encryption, hashing, and OTP utility functions.
 
 ---
 
-## 8. Frontend Modules
+## Frontend Modules
 
 ### Authentication
 
@@ -195,100 +270,7 @@ Allows Administrators to manage users, roles, MFA settings, and audit logs.
 
 ---
 
-## 9. Installation and Setup
-
-### Prerequisites
-
-Install the following:
-
-* Java JDK
-* Maven
-* Node.js and npm
-* Git
-* A Supabase account
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/Aashima0805/secure-question-paper-management.git
-cd secure-question-paper-management
-```
-
----
-
-## 10. Backend Setup
-
-Navigate to the backend:
-
-```bash
-cd backend
-```
-
-Configure the required environment variables:
-
-```text
-SUPABASE_URL
-SUPABASE_KEY
-ENCRYPTION_SECRET_KEY
-JWT_SECRET
-```
-
-Email configuration is also required for OTP functionality:
-
-```text
-MAIL_USERNAME
-MAIL_PASSWORD
-```
-
-Run the Spring Boot application using:
-
-```bash
-mvn spring-boot:run
-```
-
-The backend runs on:
-
-```text
-http://localhost:8080
-```
-
----
-
-## 11. Frontend Setup
-
-Open another terminal and navigate to:
-
-```bash
-cd frontend
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Create a `.env` file:
-
-```env
-VITE_API_BASE_URL=http://localhost:8080/api
-```
-
-Start the frontend:
-
-```bash
-npm run dev
-```
-
-The frontend runs on:
-
-```text
-http://localhost:5173
-```
-
----
-
-## 12. Sample Input and Output
+## Sample Input and Output
 
 ### Sample Input
 
@@ -358,108 +340,69 @@ Output:
 Question paper PDF downloaded successfully.
 ```
 
----
+## Application Flow / Testing Steps
 
-## 13. Cloud Deployment Architecture
+The application can be tested through the following end-to-end flow:
 
-The application is designed for deployment using separate cloud services.
+1. **Register User**
 
-```text
-                     Users
-                       │
-                       ▼
-              ┌─────────────────┐
-              │  React Frontend │
-              │ Cloudflare Pages│
-              └────────┬────────┘
-                       │ HTTPS
-                       ▼
-              ┌─────────────────┐
-              │ Spring Boot API │
-              │     Render      │
-              └────────┬────────┘
-                       │
-             ┌─────────┴─────────┐
-             │                   │
-             ▼                   ▼
-      ┌──────────────┐    ┌────────────────┐
-      │   Supabase   │    │ Supabase       │
-      │  PostgreSQL  │    │ Private Storage│
-      └──────────────┘    └────────────────┘
-             │                   │
-             └─────────┬─────────┘
-                       ▼
-              Secure Question Papers
-```
+   * Open the application.
+   * Register a new user with the required details.
+   * Use a valid email address and password.
 
-### Cloud Components
+2. **User Login**
 
-**Cloudflare Pages**
+   * Log in using the registered credentials.
+   * Enter the OTP received through email if MFA is enabled.
+     > **Note:** Multi-Factor Authentication (MFA) is implemented as a security feature. A toggle is provided in the Admin module to enable or disable MFA for demonstration and testing purposes. When MFA is enabled, users are required to verify their login using the OTP received through email.
 
-Hosts the React frontend and provides the public web interface.
+   * After successful verification, the user is redirected to the dashboard.
 
-**Render**
+3. **Admin Login**
 
-Hosts the Spring Boot backend and REST APIs.
+   * Log in as an Admin.
+   * MFA enable / disable.
+   * Assign appropriate roles such as **Question Setter, Reviewer, Approver,** or **Exam Center**.
+     > **Note:** All newly registered users are assigned the **USER** role by default. The **Admin** can change a user's role to **Question Setter, Reviewer, Approver,** or **Exam Center** based on the required responsibilities.
 
-**Supabase PostgreSQL**
 
-Stores users, question paper metadata, audit logs, security settings, and other application data.
+4. **Question Paper Upload**
 
-**Supabase Private Storage**
+   * Log in as a **Question Setter**.
+   * Upload the examination question paper as a PDF.
+   * The uploaded paper is securely encrypted and stored.
+   * The paper status is set to **Pending Review**.
 
-Stores encrypted question paper files.
+5. **Question Paper Review**
 
-### Cloud Security Flow
+   * Log in as a **Reviewer**.
+   * View the submitted question paper.
+   * Mark the paper as **Reviewed** or reject it with a rejection reason.
 
-```text
-User
- ↓
-HTTPS
- ↓
-React Frontend
- ↓
-JWT Authentication + RBAC
- ↓
-Spring Boot Backend
- ↓
-Authorization + Security Checks
- ↓
-Encrypted Private Storage
-```
+6. **Question Paper Approval**
 
-The frontend does not directly access the private question paper files. Access is controlled through the backend.
+   * Log in as an **Approver**.
+   * Review the paper that has been marked as Reviewed.
+   * Approve or reject the question paper.
 
----
+7. **Schedule Release**
 
-## 14. Future Cloud Deployment Steps
+   * For an approved paper, the Approver sets a future release date and time.
+   * The paper remains unavailable until the scheduled release time.
 
-The following deployment configuration is planned:
+8. **Exam Center Access**
 
-1. Push the complete source code to GitHub.
-2. Deploy the Spring Boot backend on Render.
-3. Configure backend environment variables in Render.
-4. Deploy the React frontend on Cloudflare Pages.
-5. Update the frontend API URL to the deployed Render backend.
-6. Configure CORS for the deployed frontend domain.
-7. Verify authentication, authorization, upload, review, approval, scheduling, and download workflows in the cloud environment.
+   * Log in as an **Exam Center** user.
+   * Attempt to download the paper before the scheduled release time.
+   * The system blocks access before the release time.
 
----
+9. **Question Paper Release**
 
-## 15. Expected Outcome
+   * After the scheduled release time, the Exam Center can download the question paper.
+   * The system verifies the integrity of the paper before providing the download.
 
-The system provides a controlled lifecycle for sensitive examination question papers. Access is restricted according to user roles, stored papers are encrypted, file integrity is verified, important actions are logged, and question papers are released only after the configured schedule.
+10. **Audit Monitoring**
 
-The architecture also supports cloud deployment using separate frontend, backend, database, and storage services.
-
----
-
-## 16. Repository
-
-GitHub Repository:
-
-```text
-https://github.com/Aashima0805/secure-question-paper-management
-```
-
----
+    * Log in as an **Admin**.
+    * Open the Audit Log section.
+    * Verify the recorded activities such as upload, review, approval, scheduling, and download.
