@@ -46,10 +46,11 @@ public class SecurityConfig {
                         ).hasRole("REVIEWER")
 
                         .requestMatchers(
-                                HttpMethod.GET,
-                                "/api/question-papers/review/**"
-                        )
-                        .hasRole("REVIEWER")
+        HttpMethod.GET,
+        "/api/question-papers/review",
+        "/api/question-papers/review/**"
+)
+.hasRole("REVIEWER")
 
                         .requestMatchers(
                                 HttpMethod.POST,
