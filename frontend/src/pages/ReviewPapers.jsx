@@ -1,12 +1,13 @@
 
 import React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import api from "../api";
 import StatusMessage from "../components/StatusMessage";
 
 function ReviewPapers() {
   const [id, setId] = useState("");
+  const [papers, setPapers] = useState([]);
   const [action, setAction] = useState("");
   const [remarks, setRemarks] = useState("");
   const [message, setMessage] = useState("");
@@ -22,12 +23,30 @@ function ReviewPapers() {
     return data || fallback;
   };
 
+  const loadPapers = async () => {
+    try {
+      const response = await api.get("/question-papers/review");
+      setPapers(response.data);
+    } catch (err) {
+      setError(
+        await getErrorMessage(
+          err,
+          "Unable to load question papers."
+        )
+      );
+    }
+  };
+
+  useEffect(() => {
+    loadPapers();
+  }, []);
+
   const viewPaper = async () => {
     setMessage("");
     setError("");
 
     if (!id) {
-      setError("Please enter a question paper ID.");
+      setError("Please select a question paper.");
       return;
     }
 
@@ -58,7 +77,7 @@ function ReviewPapers() {
     setError("");
 
     if (!id) {
-      setError("Please enter a question paper ID.");
+      setError("Please select a question paper.");
       return;
     }
 
@@ -86,6 +105,8 @@ function ReviewPapers() {
       setRemarks("");
       setAction("");
 
+      loadPapers();
+
     } catch (err) {
       setError(
         await getErrorMessage(
@@ -110,15 +131,32 @@ function ReviewPapers() {
 
       <div className="form-card narrow">
 
-        <label>Question Paper ID</label>
+        <label>Question Paper</label>
 
-        <input
-          type="number"
-          min="1"
+        <select
           value={id}
-          onChange={(e) => setId(e.target.value)}
-          required
-        />
+          onChange={(e) => {
+            setId(e.target.value);
+            setAction("");
+            setRemarks("");
+            setMessage("");
+            setError("");
+          }}
+        >
+          <option value="">Select question paper</option>
+
+          {papers.map((paper) => (
+            <option key={paper.id} value={paper.id}>
+              ID: {paper.id} - {paper.title}
+            </option>
+          ))}
+        </select>
+
+        {papers.length === 0 && (
+          <p className="muted">
+            No question papers are currently pending review.
+          </p>
+        )}
 
         <button
           type="button"
