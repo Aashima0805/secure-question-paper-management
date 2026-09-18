@@ -221,6 +221,13 @@ public class QuestionPaperController {
                     .body("Invalid release time");
         }
     }
+    @GetMapping("/review")
+public ResponseEntity<?> getPendingReviewPapers() {
+
+    return ResponseEntity.ok(
+            questionPaperRepository.findByStatus("PENDING_REVIEW")
+    );
+}
     @GetMapping("/review/{id}")
     public ResponseEntity<?> viewQuestionPaperForReview(
             @PathVariable Long id,
