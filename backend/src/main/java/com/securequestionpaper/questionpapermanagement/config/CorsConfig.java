@@ -17,8 +17,11 @@ public class CorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(
-                List.of("http://localhost:5173")
-        );
+        List.of(
+                "http://localhost:5173",
+                "https://secure-question-paper-frontend-3arr.onrender.com"
+        )
+);
 
         configuration.setAllowedMethods(
                 List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")
