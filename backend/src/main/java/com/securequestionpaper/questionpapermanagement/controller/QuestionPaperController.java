@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import com.securequestionpaper.questionpapermanagement.service.AuditLogService;
 import org.springframework.security.core.Authentication;
 @RestController
@@ -207,7 +208,7 @@ public ResponseEntity<?> getReviewedPapers() {
             LocalDateTime scheduledTime =
                     LocalDateTime.parse(releaseTime);
 
-            if (scheduledTime.isBefore(LocalDateTime.now())) {
+            if (scheduledTime.isBefore(LocalDateTime.now(ZoneId.of("Asia/Kolkata")))) {
                 return ResponseEntity.badRequest()
                         .body("Release time must be in the future");
             }
@@ -319,8 +320,8 @@ public ResponseEntity<?> getApprovedPapers() {
                         .body("Question paper release time is not scheduled");
             }
 
-            if (LocalDateTime.now()
-                    .isBefore(questionPaper.getScheduledReleaseTime())) {
+            if (LocalDateTime.now(ZoneId.of("Asia/Kolkata"))
+        .isBefore(questionPaper.getScheduledReleaseTime())) {
 
                 return ResponseEntity.status(403)
                         .body("Question paper is not yet released");
