@@ -129,6 +129,13 @@ public class QuestionPaperController {
 
         return ResponseEntity.ok(updatedPaper);
     }
+    @GetMapping("/approve")
+public ResponseEntity<?> getReviewedPapers() {
+
+    return ResponseEntity.ok(
+            questionPaperRepository.findByStatus("REVIEWED")
+    );
+}
     @PostMapping("/approve")
     public ResponseEntity<?> approveQuestionPaper(
             @RequestParam("id") Long id,
@@ -282,6 +289,13 @@ public ResponseEntity<?> getPendingReviewPapers() {
                     .body("Error viewing question paper");
         }
     }
+    @GetMapping("/download")
+public ResponseEntity<?> getApprovedPapers() {
+
+    return ResponseEntity.ok(
+            questionPaperRepository.findByStatus("APPROVED")
+    );
+}
     @GetMapping("/download/{id}")
     public ResponseEntity<?> downloadQuestionPaper(
             @PathVariable Long id,

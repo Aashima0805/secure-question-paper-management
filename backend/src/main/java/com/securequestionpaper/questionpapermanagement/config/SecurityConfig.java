@@ -53,9 +53,16 @@ public class SecurityConfig {
 .hasRole("REVIEWER")
 
                         .requestMatchers(
-                                HttpMethod.POST,
-                                "/api/question-papers/approve"
-                        ).hasRole("APPROVER")
+        HttpMethod.GET,
+        "/api/question-papers/approve"
+)
+.hasRole("APPROVER")
+
+.requestMatchers(
+        HttpMethod.POST,
+        "/api/question-papers/approve"
+)
+.hasRole("APPROVER")
 
                         .requestMatchers(
                                 HttpMethod.POST,
@@ -64,10 +71,11 @@ public class SecurityConfig {
                         .hasRole("APPROVER")
 
                         .requestMatchers(
-                                HttpMethod.GET,
-                                "/api/question-papers/download/**"
-                        )
-                        .hasRole("EXAM_CENTER")
+        HttpMethod.GET,
+        "/api/question-papers/download",
+        "/api/question-papers/download/**"
+)
+.hasRole("EXAM_CENTER")
                         .requestMatchers("/api/admin/**")
                         .hasRole("ADMIN")
 
