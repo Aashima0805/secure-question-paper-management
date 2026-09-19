@@ -353,6 +353,7 @@ The application can be tested through the following end-to-end flow:
 2. **User Login**
 
    * Log in using the registered credentials.
+   * Slow sign-in may occur because backend is running on Render's free tier
    * Enter the OTP received through email if MFA is enabled.
      > **Note:** Multi-Factor Authentication (MFA) is implemented as a security feature. A toggle is provided in the Admin module to enable or disable MFA for demonstration and testing purposes. When MFA is enabled, users are required to verify their login using the OTP received through email.
 
