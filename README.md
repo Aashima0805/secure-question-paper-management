@@ -57,7 +57,6 @@ The system is designed with a cloud deployment architecture so that the frontend
 * Postman
 * Git
 * GitHub
-* Cloudflare Pages
 * Render
 * Supabase
 
@@ -254,11 +253,7 @@ Allows Reviewers to view and review submitted question papers.
 
 ### Approval
 
-Allows Approvers to approve or reject reviewed question papers.
-
-### Schedule Release
-
-Allows Approvers to schedule the release time.
+Allows Approvers to approve or reject reviewed question papers and schedule the question paper release time.
 
 ### Download
 
