@@ -11,7 +11,7 @@ import DownloadPapers from "./pages/DownloadPapers";
 import AdminUsers from "./pages/AdminUsers";
 import AuditLogs from "./pages/AuditLogs";
 import ProtectedRoute from "./components/ProtectedRoute";
-import ScheduleRelease from "./pages/ScheduleRelease";
+
 function App() {
   return (
     <Routes>
@@ -37,15 +37,6 @@ function App() {
 >
   <Route path="/approve" element={<ApprovePapers />} />
 </Route>
-
-  <Route
-    element={<ProtectedRoute allowedRoles={["APPROVER"]} />}
-  >
-    <Route
-      path="/schedule-release"
-      element={<ScheduleRelease />}
-    />
-  </Route>
 
   <Route
   element={<ProtectedRoute allowedRoles={["EXAM_CENTER"]} />}

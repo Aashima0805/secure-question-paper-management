@@ -18,8 +18,7 @@ function Layout({ children }) {
     ],
    APPROVER: [
   { label: "Dashboard", path: "/dashboard" },
-  { label: "Approve Papers", path: "/approve" },
-  { label: "Schedule Release", path: "/schedule-release" }
+  { label: "Approve Papers", path: "/approve" }
 ],
     EXAM_CENTER: [
       { label: "Dashboard", path: "/dashboard" },
