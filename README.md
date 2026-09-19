@@ -384,7 +384,7 @@ The application can be tested through the following end-to-end flow:
 
    * Log in as a **Reviewer**.
    * View the submitted question paper.
-   * Mark the paper as **Reviewed** or reject it with a rejection reason.
+   * Mark the paper as **Reviewed** or **Reject**.
 
 6. **Question Paper Approval**
 
