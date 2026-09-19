@@ -31,7 +31,10 @@ function Login() {
         saveSession(response.data);
         navigate("/dashboard");
       } else {
-        localStorage.setItem("pendingEmail", response.data.email || form.email);
+        localStorage.setItem(
+          "pendingEmail",
+          response.data.email || form.email
+        );
         navigate("/verify-otp");
       }
     } catch (error) {
@@ -53,23 +56,39 @@ function Login() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="logo-mark">SQ</div>
+
         <h1>SecureQPM</h1>
-        <p className="muted">Secure Question Paper Management</p>
+
+        <p className="muted">
+          Secure Question Paper Management
+        </p>
 
         <form onSubmit={submit}>
           <label>Email</label>
+
           <input
             type="email"
             value={form.email}
-            onChange={(e) => setForm({...form, email: e.target.value})}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                email: e.target.value
+              })
+            }
             required
           />
 
           <label>Password</label>
+
           <input
             type="password"
             value={form.password}
-            onChange={(e) => setForm({...form, password: e.target.value})}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                password: e.target.value
+              })
+            }
             required
           />
 
@@ -80,38 +99,52 @@ function Login() {
 
         <StatusMessage message={message} error />
 
-<div className="demo-accounts">
-  <h3>Demo Accounts</h3>
-  <p className="muted">
-    Admin login always requires OTP verification. Please use an Admin account
-    with access to its registered email to receive the OTP.
-  </p>
+        <div className="demo-accounts">
+          <div className="demo-header">
+            <div>
+              <h3>Demo Accounts</h3>
+              <p className="muted">
+                Select a role to fill in the login details.
+              </p>
+            </div>
+          </div>
 
-  {demoAccounts.map((account) => (
-    <div className="demo-account" key={account.role}>
-      <div>
-        <strong>{account.role}</strong>
-        <small>{account.email}</small>
-      </div>
+          <div className="demo-list">
+            {demoAccounts.map((account) => (
+              <button
+                type="button"
+                className="demo-account"
+                key={account.role}
+                onClick={() => useDemoAccount(account)}
+              >
+                <span className="demo-role">
+                  {account.role}
+                </span>
 
-      <button
-        type="button"
-        onClick={() => useDemoAccount(account)}
-      >
-        Use
-      </button>
-    </div>
-  ))}
-</div>
+                <span className="demo-email">
+                  {account.email}
+                </span>
 
-<p className="auth-link">
-  New user? <Link to="/register">Create account</Link>
-</p>
+                <span className="demo-use">
+                  Use
+                </span>
+              </button>
+            ))}
+          </div>
 
-        
+          <p className="demo-note">
+            Password: <strong>User@123</strong>
+            <br />
+            Admin login always requires OTP verification.
+          </p>
+        </div>
+
+        <p className="auth-link">
+          New user? <Link to="/register">Create account</Link>
+        </p>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Login
