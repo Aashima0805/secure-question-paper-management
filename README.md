@@ -160,7 +160,13 @@ secure-question-paper-management/
 │
 ├── README.md
 ├── .gitignore
-│
+├── screenshots/
+│   ├── Login.png
+│   ├── Question Setter.png
+│   ├── Review.png
+│   ├── Approve.png
+│   ├── Exam Centre 1.png
+│   └── Exam Centre 2.png
 ├── backend/
 │   ├── pom.xml
 │   ├── mvnw
@@ -265,75 +271,80 @@ Allows Administrators to manage users, roles, MFA settings, and audit logs.
 
 ---
 
-## Sample Input and Output
+## Sample Input / Output
 
-### Sample Input
+### 1. User Login
 
-Question Setter uploads:
+**Input:**
+- Email: `setter@test.com`
+- Password: `User@123`
 
-```text
-Title: Mathematics Competitive Examination 2026
-File: mathematics_question_paper.pdf
-```
+**Output:**
+- Successful login redirects the user to the dashboard.
+- Based on the assigned role, the user can access only the permitted modules.
 
-### Sample Output
+### 2. Question Paper Upload
 
-The system returns a successful upload response and assigns a question paper ID.
+**Input:**
+- Question Paper Title: `UPSC General Studies`
+- PDF File: `question-paper.pdf`
 
-Example:
+**Output:**
+- The PDF is encrypted using AES-GCM.
+- A SHA-256 hash is generated for integrity verification.
+- The encrypted file is stored in private cloud storage.
+- The paper status is set to `PENDING_REVIEW`.
 
-```text
-Question Paper ID: 4
-Status: PENDING_REVIEW
-Message: Question paper uploaded successfully.
-```
+### 3. Question Paper Review
 
-### Review Example
+**Input:**
+- Reviewer selects and views a pending question paper.
+- Decision: `REVIEWED` or `REJECTED`
 
-Input:
+**Output:**
+- `REVIEWED` → paper moves to the approval stage.
+- `REJECTED` → paper is rejected and the action is recorded in the audit log.
 
-```text
-Question Paper ID: 4
-Decision: REVIEWED
-```
+### 4. Question Paper Approval and Scheduling
 
-Output:
+**Input:**
+- Approver selects a reviewed question paper.
+- Decision: `APPROVE`
+- Release Date & Time: `Scheduled date and time`
 
-```text
-Question paper marked as reviewed.
-```
+**Output:**
+- Paper status becomes `APPROVED`.
+- The release time is stored.
+- The scheduling action is recorded in the audit log.
 
-### Rejection Example
+### 5. Secure Download
 
-Input:
+**Input:**
+- Exam Center selects an approved question paper.
 
-```text
-Question Paper ID: 5
-Decision: REJECTED
-Reason: Incorrect question paper format.
-```
+**Output:**
+- Before the scheduled release time → download is denied.
+- After the scheduled release time → the encrypted paper is retrieved, decrypted, integrity-verified using SHA-256, and downloaded as a PDF.
 
-Output:
+## Screenshots
 
-```text
-Question paper rejected successfully.
-```
+### Login
+![Login](screenshots/Login.png)
 
-### Download Before Release
+### Question Setter - Upload Question Paper
+![Question Setter](screenshots/Question%20Setter.png)
 
-Output:
+### Reviewer - View and Mark as Reviewed
+![Review](screenshots/Review.png)
 
-```text
-Question paper is not yet available for download.
-```
+### Approver - Approve Question Paper
+![Approve](screenshots/Approve.png)
 
-### Download After Release
+### Exam Center - Download Denied Before Release
+![Download Denied](screenshots/Exam%20Centre%201.png)
 
-Output:
-
-```text
-Question paper PDF downloaded successfully.
-```
+### Exam Center - Successful Download After Release
+![Download Successful](screenshots/Exam%20Centre%202.png)
 
 ## Application Flow / Testing Steps
 
