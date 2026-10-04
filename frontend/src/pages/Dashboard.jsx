@@ -46,7 +46,6 @@ function Dashboard() {
         <div className="security-list">
           <span>✓ JWT Authentication</span>
           <span>✓ Role-Based Access Control</span>
-          <span>✓ MFA for privileged roles</span>
           <span>✓ Encrypted private storage</span>
           <span>✓ Integrity verification</span>
           <span>✓ Audit logging</span>

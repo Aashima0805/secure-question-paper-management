@@ -1,7 +1,7 @@
 package com.securequestionpaper.questionpapermanagement.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -18,11 +18,7 @@ public class User {
     private String password;
 
     private String role;
-    private boolean mfaEnabled;
 
-    private String otp;
-
-    private LocalDateTime otpExpiry;
     public User() {
     }
 
@@ -64,28 +60,5 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public boolean isMfaEnabled() {
-        return mfaEnabled;
-    }
-
-    public void setMfaEnabled(boolean mfaEnabled) {
-        this.mfaEnabled = mfaEnabled;
-    }
-    public String getOtp() {
-        return otp;
-    }
-
-    public void setOtp(String otp) {
-        this.otp = otp;
-    }
-
-    public LocalDateTime getOtpExpiry() {
-        return otpExpiry;
-    }
-
-    public void setOtpExpiry(LocalDateTime otpExpiry) {
-        this.otpExpiry = otpExpiry;
     }
 }

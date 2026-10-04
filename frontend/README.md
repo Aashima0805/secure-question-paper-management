@@ -6,7 +6,6 @@ Complete React/Vite frontend for the Secure Question Paper Management System.
 
 - Login
 - Registration
-- MFA OTP verification
 - JWT Authorization
 - Role-based navigation
 - User dashboard
@@ -39,7 +38,6 @@ VITE_API_BASE_URL=http://localhost:8080/api
 The frontend is built against the Spring Boot endpoint names currently established in the project:
 - /users/register
 - /users/login
-- /users/verify-otp
 - /question-papers/upload
 - /question-papers/review
 - /question-papers/approve

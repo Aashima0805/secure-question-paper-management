@@ -41,9 +41,6 @@ The system is designed with a cloud deployment architecture so that the frontend
 
 * JWT Authentication
 * Role-Based Access Control (RBAC)
-* Multi-Factor Authentication (MFA)
-* OTP
-* BCrypt password/OTP hashing
 * AES-GCM encryption
 * SHA-256 file integrity verification
 * HTTPS
@@ -97,13 +94,6 @@ SUPABASE_URL
 SUPABASE_KEY
 ENCRYPTION_SECRET_KEY
 JWT_SECRET
-```
-
-Email configuration is also required for OTP functionality:
-
-```text
-MAIL_USERNAME
-MAIL_PASSWORD
 ```
 
 Run the Spring Boot application using:
@@ -219,11 +209,11 @@ Provides REST API endpoints for users, question papers, administration, and audi
 
 ### DTO
 
-Contains request data structures used by authentication and OTP operations.
+Contains request data structures used by the application.
 
 ### Entity
 
-Contains database entities such as User, QuestionPaper, AuditLog, and SecuritySetting.
+Contains database entities such as User, QuestionPaper, AuditLog.
 
 ### Repository
 
@@ -231,11 +221,11 @@ Provides database access using Spring Data JPA.
 
 ### Service
 
-Contains business logic for authentication, JWT generation, OTP/MFA, email, Supabase storage, and audit logging.
+Contains business logic for authentication, JWT generation, email, Supabase storage, and audit logging.
 
 ### Utility
 
-Contains encryption, hashing, and OTP utility functions.
+Contains encryption, hashing utility functions.
 
 ---
 
@@ -243,7 +233,7 @@ Contains encryption, hashing, and OTP utility functions.
 
 ### Authentication
 
-Provides registration, login, and OTP verification.
+Provides registration, login using email and password.
 
 ### Dashboard
 
@@ -267,7 +257,7 @@ Allows Exam Centers to download question papers after release.
 
 ### Administration
 
-Allows Administrators to manage users, roles, MFA settings, and audit logs.
+Allows Administrators to manage users, roles and audit logs.
 
 ---
 
@@ -360,15 +350,11 @@ The application can be tested through the following end-to-end flow:
 
    * Log in using the registered credentials.
    * Slow sign-in may occur because backend is running on Render's free tier
-   * Enter the OTP received through email if MFA is enabled.
-     > **Note:** Multi-Factor Authentication (MFA) is implemented as a security feature. A toggle is provided in the Admin module to enable or disable MFA for demonstration and testing purposes. When MFA is enabled, users are required to verify their login using the OTP received through email.
-
    * After successful verification, the user is redirected to the dashboard.
 
 3. **Admin Login**
 
    * Log in as an Admin.
-   * MFA enable / disable.
    * Assign appropriate roles such as **Question Setter, Reviewer, Approver,** or **Exam Center**.
      > **Note:** All newly registered users are assigned the **USER** role by default. The **Admin** can change a user's role to **Question Setter, Reviewer, Approver,** or **Exam Center** based on the required responsibilities.
 

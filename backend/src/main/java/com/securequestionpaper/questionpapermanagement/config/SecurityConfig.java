@@ -1,5 +1,4 @@
-
-        package com.securequestionpaper.questionpapermanagement.config;
+package com.securequestionpaper.questionpapermanagement.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +30,7 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 "/api/users/register",
-                                "/api/users/login",
-                                "/api/users/verify-otp"
+                                "/api/users/login"
                         ).permitAll()
 
                         .requestMatchers(
@@ -46,36 +44,32 @@ public class SecurityConfig {
                         ).hasRole("REVIEWER")
 
                         .requestMatchers(
-        HttpMethod.GET,
-        "/api/question-papers/review",
-        "/api/question-papers/review/**"
-)
-.hasRole("REVIEWER")
+                                HttpMethod.GET,
+                                "/api/question-papers/review",
+                                "/api/question-papers/review/**"
+                        ).hasRole("REVIEWER")
 
                         .requestMatchers(
-        HttpMethod.GET,
-        "/api/question-papers/approve"
-)
-.hasRole("APPROVER")
+                                HttpMethod.GET,
+                                "/api/question-papers/approve"
+                        ).hasRole("APPROVER")
 
-.requestMatchers(
-        HttpMethod.POST,
-        "/api/question-papers/approve"
-)
-.hasRole("APPROVER")
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/question-papers/approve"
+                        ).hasRole("APPROVER")
 
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/question-papers/schedule"
-                        )
-                        .hasRole("APPROVER")
+                        ).hasRole("APPROVER")
 
                         .requestMatchers(
-        HttpMethod.GET,
-        "/api/question-papers/download",
-        "/api/question-papers/download/**"
-)
-.hasRole("EXAM_CENTER")
+                                HttpMethod.GET,
+                                "/api/question-papers/download",
+                                "/api/question-papers/download/**"
+                        ).hasRole("EXAM_CENTER")
+
                         .requestMatchers("/api/admin/**")
                         .hasRole("ADMIN")
 

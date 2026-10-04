@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,16 +26,8 @@ function Login() {
     try {
       const response = await api.post("/users/login", form);
 
-      if (response.data.token) {
-        saveSession(response.data);
-        navigate("/dashboard");
-      } else {
-        localStorage.setItem(
-          "pendingEmail",
-          response.data.email || form.email
-        );
-        navigate("/verify-otp");
-      }
+      saveSession(response.data);
+      navigate("/dashboard");
     } catch (error) {
       setMessage(error.response?.data || "Login failed");
     } finally {
@@ -134,8 +125,6 @@ function Login() {
 
           <p className="demo-note">
             Password: <strong>User@123</strong>
-            <br />
-            Admin login always requires OTP verification.
           </p>
         </div>
 
@@ -147,4 +136,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Login;
