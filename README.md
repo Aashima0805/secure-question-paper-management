@@ -402,4 +402,4 @@ The application can be tested through the following end-to-end flow:
 
 ## Demonstration Video
 
-[▶️ Watch the Project Demonstration Video](demo/Demonstration.mp4)
+[▶️ Open / Download the Project Demonstration Video](https://github.com/Aashima0805/secure-question-paper-management/raw/refs/heads/main/demo/Demonstration.mp4)
