@@ -402,4 +402,10 @@ The application can be tested through the following end-to-end flow:
 
 ## Demonstration Video
 
-[▶️ Open / Download the Project Demonstration Video](https://github.com/Aashima0805/secure-question-paper-management/raw/refs/heads/main/demo/Demonstration.mp4)
+[▶️ View Demonstration Video](demo/Demonstration.mp4)
+
+> If the demonstration video does not open or play through GitHub, please use the Google Drive link below:
+>
+> [▶️ View Demonstration Video on Google Drive](https://drive.google.com/file/d/1BXpIljvRFY2-u4cm_XnTtZbl0htgYu9I/view?usp=sharing)
+
+
