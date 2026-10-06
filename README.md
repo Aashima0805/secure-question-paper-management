@@ -399,3 +399,7 @@ The application can be tested through the following end-to-end flow:
     * Log in as an **Admin**.
     * Open the Audit Log section.
     * Verify the recorded activities such as upload, review, approval, scheduling, and download.
+
+## Demonstration Video
+
+[▶️ Watch the Project Demonstration Video](demo/Demonstration.mp4)
